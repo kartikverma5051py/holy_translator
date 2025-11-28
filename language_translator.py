@@ -6,7 +6,8 @@ import base64
 st.set_page_config(page_title="Holy Translator", layout="centered")
 
 # ================= Local background image =================
-image_path = r"C:\Users\karti\OneDrive\Documents\Langchain_Learning\machine_learning\WhatsApp_Image.jpeg"
+image_path = "WhatsApp_Image.jpeg"
+
 
 # Read and encode image
 with open(image_path, "rb") as f:
@@ -179,3 +180,4 @@ window.onload = function(){{
         </a>
         """
         st.markdown(slideshow_link, unsafe_allow_html=True)
+
