@@ -8,7 +8,6 @@ st.set_page_config(page_title="Holy Translator", layout="centered")
 # ================= Local background image =================
 image_path = "WhatsApp_Image.jpeg"
 
-
 # Read and encode image
 with open(image_path, "rb") as f:
     img_bytes = f.read()
@@ -45,19 +44,12 @@ if uploaded:
     text = uploaded.read().decode("utf-8")
     lines = [l.strip() for l in text.split("\n") if l.strip()]
 
-    choice = st.radio("🌍 Translation type:", ["English → Hindi", "Hindi → Marathi"])
-
-    lang_map = {
-        "English → Hindi": ("en", "hi"),
-        "Hindi → Marathi": ("hi", "mr")
-    }
-
-    src, dest = lang_map[choice]
+    st.info("🌍 Auto-detecting language → Translating to English")
 
     if st.button("✨ Translate Now"):
         output = []
         for line in lines:
-            translated = GoogleTranslator(source=src, target=dest).translate(line)
+            translated = GoogleTranslator(source="auto", target="en").translate(line)
             output.append((line, translated))
 
         st.success("✅ Translation completed!")
@@ -119,7 +111,6 @@ let slideInterval;
 
 function render(i){{
     const box = document.getElementById("slide-box");
-    // Just plain lines: original and translation
     box.innerHTML = slides[i].eng + "<br><br>" + slides[i].tr;
 }}
 
@@ -134,7 +125,7 @@ function prevSlide(){{
 }}
 
 function startAuto(){{
-    slideInterval = setInterval(nextSlide, 2000); // 7 seconds
+    slideInterval = setInterval(nextSlide, 2000);
 }}
 
 function stopAuto(){{
@@ -180,4 +171,3 @@ window.onload = function(){{
         </a>
         """
         st.markdown(slideshow_link, unsafe_allow_html=True)
-
